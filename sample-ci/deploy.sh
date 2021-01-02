@@ -19,4 +19,4 @@ tar xzf -
 . secret/env.sh
 
 ./s50_aws_init_env.sh
-./s51_aws_deploy.sh ${STAGE}
+./s58_aws_deploy.sh ${STAGE}

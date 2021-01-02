@@ -13,7 +13,7 @@ https://static-codelog-webtemplate1601-sample.aws-public.luzi82.com
 ## Run gitpod
 
 ```
-./s01_dev_run_local.sh
+./s08_dev_run_local.sh
 ```
 
 ## Run local
@@ -21,7 +21,7 @@ https://static-codelog-webtemplate1601-sample.aws-public.luzi82.com
 ```
 aws configure # configure credentials
 ./s00_dev_init_env.sh
-./s01_dev_run_local.sh
+./s08_dev_run_local.sh
 ```
 
 ## Deploy to AWS
@@ -29,7 +29,7 @@ aws configure # configure credentials
 1. Create domain in AWS Route 53.
 1. Create cert for domain.
 1. Create and edit `conf/conf.json` from `conf/conf.json.sample`.
-1. `./s50_aws_init_env.sh && ./s51_aws_deploy.sh`
+1. `./s50_aws_init_env.sh && ./s58_aws_deploy.sh`
 
 ## Undeploy from AWS
 

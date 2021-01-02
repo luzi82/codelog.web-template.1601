@@ -74,3 +74,7 @@ def index():
 def get_compute_domain():
     conf_data = futsu.json.path_to_data(futsu.storage.join(CONF_PATH,'conf.json'))
     return conf_data['COMPUTE_DOMAIN']
+
+@app.route('/testme')
+def testme():
+  return 'testme'
