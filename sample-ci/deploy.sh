@@ -21,4 +21,4 @@ tar xzf -
 cp sample-ci/conf.json conf/conf.json
 
 ./s50_aws_init_env.sh
-./s51_aws_deploy.sh
+./s58_aws_deploy.sh
