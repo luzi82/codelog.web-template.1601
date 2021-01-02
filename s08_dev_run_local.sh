@@ -2,6 +2,7 @@
 
 . _env.sh
 
+STAGE=local
 MY_TMP_DIR_PATH=${LOCAL_TMP_DIR_PATH}
 MY_VAR_DIR_PATH=${LOCAL_VAR_DIR_PATH}
 
@@ -10,11 +11,11 @@ MY_VAR_DIR_PATH=${LOCAL_VAR_DIR_PATH}
 
 # clean up
 cd ${PROJECT_ROOT_PATH}
-kill_pid ${MY_TMP_DIR_PATH}/dynamodb.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-static.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-mutable.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-deploygen.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-tmp.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-static.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-mutable.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-deploygen.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-tmp.pid
 rm -rf ${MY_TMP_DIR_PATH}
 mkdir -p ${MY_TMP_DIR_PATH}
 
@@ -27,7 +28,7 @@ PUBLIC_TMP_PORT=${LOCAL_PUBLIC_TMP_PORT}
 DYNAMODB_PORT=${LOCAL_DYNAMODB_PORT}
 
 # load env var
-export STAGE=local
+export STAGE=${STAGE}
 export CONF_PATH=${PROJECT_ROOT_PATH}/stages/${STAGE}
 if [ -z ${GITPOD_REPO_ROOT+x} ]; then
   export PUBLIC_COMPUTE_URL_PREFIX="http://localhost:${PUBLIC_COMPUTE_PORT}"
@@ -71,7 +72,7 @@ java \
   -dbPath ${MY_VAR_DIR_PATH}/dynamodb.data \
   -port ${DYNAMODB_PORT} \
   &
-echo $! > ${MY_TMP_DIR_PATH}/dynamodb.pid
+echo $! > ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
 
 # deploygen
 cd ${PROJECT_ROOT_PATH}
@@ -98,9 +99,9 @@ ${PROJECT_ROOT_PATH}/dev_env/venv/bin/flask run --host 0.0.0.0
 
 # clean up
 cd ${PROJECT_ROOT_PATH}
-kill_pid ${MY_TMP_DIR_PATH}/dynamodb.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-static.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-mutable.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-deploygen.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-tmp.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-static.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-mutable.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-deploygen.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-tmp.pid
 rm -rf ${MY_TMP_DIR_PATH}

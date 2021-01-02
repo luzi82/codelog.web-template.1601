@@ -2,6 +2,7 @@
 
 . _env.sh
 
+STAGE=unittest
 MY_TMP_DIR_PATH=${UNITTEST_TMP_DIR_PATH}
 
 # activate venv for yq
@@ -9,11 +10,11 @@ MY_TMP_DIR_PATH=${UNITTEST_TMP_DIR_PATH}
 
 # clean up
 cd ${PROJECT_ROOT_PATH}
-kill_pid ${MY_TMP_DIR_PATH}/dynamodb.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-static.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-mutable.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-deploygen.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-tmp.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-static.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-mutable.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-deploygen.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-tmp.pid
 rm -rf ${MY_TMP_DIR_PATH}
 mkdir -p ${MY_TMP_DIR_PATH}
 
@@ -26,7 +27,7 @@ PUBLIC_TMP_PORT=${UNITTEST_PUBLIC_TMP_PORT}
 DYNAMODB_PORT=${UNITTEST_DYNAMODB_PORT}
 
 # load env var
-export STAGE=unittest
+export STAGE=${STAGE}
 export CONF_PATH=${PROJECT_ROOT_PATH}/stages/${STAGE}
 if [ -z ${GITPOD_REPO_ROOT+x} ]; then
   export PUBLIC_COMPUTE_URL_PREFIX="http://localhost:${PUBLIC_COMPUTE_PORT}"
@@ -70,7 +71,7 @@ java \
   -inMemory \
   -port ${DYNAMODB_PORT} \
   &
-echo $! > ${MY_TMP_DIR_PATH}/dynamodb.pid
+echo $! > ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
 
 # load dynamodb setting
 cd ${PROJECT_ROOT_PATH}
@@ -118,9 +119,9 @@ pytest -v -s
 
 # clean up
 cd ${PROJECT_ROOT_PATH}
-kill_pid ${MY_TMP_DIR_PATH}/dynamodb.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-static.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-mutable.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-deploygen.pid
-kill_pid ${MY_TMP_DIR_PATH}/public-tmp.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-static.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-mutable.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-deploygen.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.public-tmp.pid
 rm -rf ${MY_TMP_DIR_PATH}

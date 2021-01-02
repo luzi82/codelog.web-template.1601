@@ -2,6 +2,7 @@
 
 . _env.sh
 
+export STAGE=local
 MY_TMP_DIR_PATH=${LOCAL_TMP_DIR_PATH}
 MY_VAR_DIR_PATH=${LOCAL_VAR_DIR_PATH}
 
@@ -10,7 +11,7 @@ MY_VAR_DIR_PATH=${LOCAL_VAR_DIR_PATH}
 
 # clean up
 cd ${PROJECT_ROOT_PATH}
-kill_pid ${MY_TMP_DIR_PATH}/dynamodb.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
 mkdir -p ${MY_TMP_DIR_PATH}
 
 # local var
@@ -25,6 +26,7 @@ export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # run dynamodb local
 cd ${PROJECT_ROOT_PATH}
+rm -rf ${MY_VAR_DIR_PATH}/dynamodb.data
 mkdir -p ${MY_VAR_DIR_PATH}/dynamodb.data
 java \
   -Djava.library.path=${PROJECT_ROOT_PATH}/dev_env/dynamodb_local/DynamoDBLocal_lib \
@@ -32,7 +34,7 @@ java \
   -dbPath ${MY_VAR_DIR_PATH}/dynamodb.data \
   -port ${DYNAMODB_PORT} \
   &
-echo $! > ${MY_TMP_DIR_PATH}/dynamodb.pid
+echo $! > ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
 
 # load dynamodb setting
 cd ${PROJECT_ROOT_PATH}
@@ -58,4 +60,4 @@ aws dynamodb wait table-exists \
 
 # clean up
 cd ${PROJECT_ROOT_PATH}
-kill_pid ${MY_TMP_DIR_PATH}/dynamodb.pid
+kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
