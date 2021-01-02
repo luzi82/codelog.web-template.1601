@@ -3,6 +3,10 @@
 . _env.sh
 
 MY_TMP_DIR_PATH=${LOCAL_TMP_DIR_PATH}
+MY_VAR_DIR_PATH=${LOCAL_VAR_DIR_PATH}
+
+# activate venv
+. ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
 
 # clean up
 cd ${PROJECT_ROOT_PATH}
@@ -57,42 +61,17 @@ export FLASK_RUN_PORT=${PUBLIC_COMPUTE_PORT}
 export FUTSU_GCP_ENABLE=0
 export FLASK_DEBUG=1
 export FLASK_APP=${PROJECT_ROOT_PATH}/src/endpoint.py
-
-# activate venv
-. ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
-
-# unzip dynamodb local
-cd ${PROJECT_ROOT_PATH}
-mkdir -p ${MY_TMP_DIR_PATH}/dynamodb_local
-cd ${MY_TMP_DIR_PATH}/dynamodb_local
-tar -xzf ${PROJECT_ROOT_PATH}/dev_env/dynamodb_local_latest.tar.gz
+export PYTHONPATH=${PROJECT_ROOT_PATH}/src
 
 # run dynamodb local
-cd ${MY_TMP_DIR_PATH}
-java -Djava.library.path=./dynamodb_local/DynamoDBLocal_lib -jar dynamodb_local/DynamoDBLocal.jar -inMemory -port ${DYNAMODB_PORT} &
-echo $! > dynamodb.pid
-
-# load dynamodb setting
 cd ${PROJECT_ROOT_PATH}
-yq -cM .resources.Resources.Db.Properties.AttributeDefinitions   ${PROJECT_ROOT_PATH}/aws/serverless.yml | tr -d '\n' > ${MY_TMP_DIR_PATH}/db.AttributeDefinitions
-yq -cM .resources.Resources.Db.Properties.KeySchema              ${PROJECT_ROOT_PATH}/aws/serverless.yml | tr -d '\n' > ${MY_TMP_DIR_PATH}/db.KeySchema
-yq -cM .resources.Resources.Db.Properties.GlobalSecondaryIndexes ${PROJECT_ROOT_PATH}/aws/serverless.yml | tr -d '\n' > ${MY_TMP_DIR_PATH}/db.GlobalSecondaryIndexes
-yq -r  .resources.Resources.Db.Properties.BillingMode            ${PROJECT_ROOT_PATH}/aws/serverless.yml | tr -d '\n' > ${MY_TMP_DIR_PATH}/db.BillingMode
-
-# create table
-cd ${PROJECT_ROOT_PATH}
-aws dynamodb create-table \
-    --table-name tmp_table \
-    --attribute-definitions file://${MY_TMP_DIR_PATH}/db.AttributeDefinitions \
-    --key-schema file://${MY_TMP_DIR_PATH}/db.KeySchema \
-    --global-secondary-indexes file://${MY_TMP_DIR_PATH}/db.GlobalSecondaryIndexes \
-    --billing-mode file://${MY_TMP_DIR_PATH}/db.BillingMode \
-    --endpoint-url "${DYNAMODB_ENDPOINT_URL}" \
-    --region "${DYNAMODB_REGION}"
-aws dynamodb wait table-exists \
-    --table-name tmp_table \
-    --endpoint-url "${DYNAMODB_ENDPOINT_URL}" \
-    --region "${DYNAMODB_REGION}"
+java \
+  -Djava.library.path=${PROJECT_ROOT_PATH}/dev_env/dynamodb_local/DynamoDBLocal_lib \
+  -jar ${PROJECT_ROOT_PATH}/dev_env/dynamodb_local/DynamoDBLocal.jar \
+  -dbPath ${MY_VAR_DIR_PATH}/dynamodb.data \
+  -port ${DYNAMODB_PORT} \
+  &
+echo $! > ${MY_TMP_DIR_PATH}/dynamodb.pid
 
 # deploygen
 cd ${PROJECT_ROOT_PATH}

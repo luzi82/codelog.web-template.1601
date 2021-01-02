@@ -63,7 +63,7 @@ export FLASK_APP=${PROJECT_ROOT_PATH}/src/endpoint.py
 export PYTHONPATH=${PROJECT_ROOT_PATH}/src
 
 # run dynamodb local
-cd ${MY_TMP_DIR_PATH}
+cd ${PROJECT_ROOT_PATH}
 java \
   -Djava.library.path=${PROJECT_ROOT_PATH}/dev_env/dynamodb_local/DynamoDBLocal_lib \
   -jar ${PROJECT_ROOT_PATH}/dev_env/dynamodb_local/DynamoDBLocal.jar \

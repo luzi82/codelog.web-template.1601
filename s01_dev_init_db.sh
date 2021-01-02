@@ -3,6 +3,7 @@
 . _env.sh
 
 MY_TMP_DIR_PATH=${LOCAL_TMP_DIR_PATH}
+MY_VAR_DIR_PATH=${LOCAL_VAR_DIR_PATH}
 
 # activate venv for yq
 . ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
@@ -24,10 +25,11 @@ export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # run dynamodb local
 cd ${PROJECT_ROOT_PATH}
+mkdir -p ${MY_VAR_DIR_PATH}/dynamodb.data
 java \
   -Djava.library.path=${PROJECT_ROOT_PATH}/dev_env/dynamodb_local/DynamoDBLocal_lib \
   -jar ${PROJECT_ROOT_PATH}/dev_env/dynamodb_local/DynamoDBLocal.jar \
-  -inMemory \
+  -dbPath ${MY_VAR_DIR_PATH}/dynamodb.data \
   -port ${DYNAMODB_PORT} \
   &
 echo $! > ${MY_TMP_DIR_PATH}/dynamodb.pid
