@@ -2,7 +2,7 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: ./s00_dev_init_env.sh
+  - init: ./s00_dev_init_env.sh && ./s01_dev_init_db.sh
     command: ./s08_dev_run_local.sh
 ports: 
   - port: 8000
