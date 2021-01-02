@@ -3,7 +3,7 @@ image:
 
 tasks:
   - init: ./s00_dev_init_env.sh
-    command: ./s09_dev_run_local.sh
+    command: ./s08_dev_run_local.sh
 ports: 
   - port: 5000
     onOpen: open-preview

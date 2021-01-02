@@ -12,14 +12,14 @@ https://codelog-flask-sample.aws-public.luzi82.com
 ## Run gitpod
 
 ```
-./s09_dev_run_local.sh
+./s08_dev_run_local.sh
 ```
 
 ## Run local
 
 ```
 ./s00_dev_init_env.sh
-./s09_dev_run_local.sh
+./s08_dev_run_local.sh
 ```
 
 ## Deploy to AWS
