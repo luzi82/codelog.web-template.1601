@@ -16,3 +16,4 @@ python3 -m venv ${PROJECT_ROOT_PATH}/dev_env/venv
 . ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
 pip install --upgrade pip wheel
 pip install -r ${PROJECT_ROOT_PATH}/src/requirements.txt
+pip install pytest
