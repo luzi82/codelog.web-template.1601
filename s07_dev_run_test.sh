@@ -4,6 +4,9 @@
 
 MY_TMP_DIR_PATH=${UNITTEST_TMP_DIR_PATH}
 
+# activate venv for yq
+. ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
+
 # clean up
 cd ${PROJECT_ROOT_PATH}
 kill_pid ${MY_TMP_DIR_PATH}/dynamodb.pid
@@ -59,13 +62,15 @@ export FLASK_DEBUG=1
 export FLASK_APP=${PROJECT_ROOT_PATH}/src/endpoint.py
 export PYTHONPATH=${PROJECT_ROOT_PATH}/src
 
-# activate venv
-. ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
-
 # run dynamodb local
 cd ${MY_TMP_DIR_PATH}
-java -Djava.library.path=./dynamodb_local/DynamoDBLocal_lib -jar dynamodb_local/DynamoDBLocal.jar -inMemory -port ${DYNAMODB_PORT} &
-echo $! > dynamodb.pid
+java \
+  -Djava.library.path=${PROJECT_ROOT_PATH}/dev_env/dynamodb_local/DynamoDBLocal_lib \
+  -jar ${PROJECT_ROOT_PATH}/dev_env/dynamodb_local/DynamoDBLocal.jar \
+  -inMemory \
+  -port ${DYNAMODB_PORT} \
+  &
+echo $! > ${MY_TMP_DIR_PATH}/dynamodb.pid
 
 # load dynamodb setting
 cd ${PROJECT_ROOT_PATH}
