@@ -15,3 +15,7 @@ def index():
         now = now,
         flask_request_host_url = flask_request_host_url,
     )
+
+@app.route('/testme')
+def testme():
+  return 'testme'
