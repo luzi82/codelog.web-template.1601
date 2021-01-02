@@ -15,6 +15,7 @@ RUN true \
     curl \
     jq \
     openjdk-11-jre \
+    procps \
     python3.7 \
     python3-venv
 
