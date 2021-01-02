@@ -61,17 +61,6 @@ export FLASK_APP=${PROJECT_ROOT_PATH}/src/endpoint.py
 # activate venv
 . ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
 
-# update dynamodb local
-mkdir -p ${MY_TMP_DIR_PATH}
-curl https://s3.us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz.sha256 -o ${MY_TMP_DIR_PATH}/dynamodb_local_latest.tar.gz.sha256
-TMP0=`cat ${MY_TMP_DIR_PATH}/dynamodb_local_latest.tar.gz.sha256 | awk '{print $1}'`
-TMP1=1 ; echo "${TMP0} ${PROJECT_ROOT_PATH}/dev_env/dynamodb_local_latest.tar.gz" | sha256sum -c - || TMP1=$?
-if [ "${TMP1}" != "0" ]; then
-  rm -f ${PROJECT_ROOT_PATH}/dev_env/dynamodb_local_latest.tar.gz
-  curl https://s3.us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz -o ${PROJECT_ROOT_PATH}/dev_env/dynamodb_local_latest.tar.gz
-fi
-echo "${TMP0} ${PROJECT_ROOT_PATH}/dev_env/dynamodb_local_latest.tar.gz" | sha256sum -c -
-
 # unzip dynamodb local
 cd ${PROJECT_ROOT_PATH}
 mkdir -p ${MY_TMP_DIR_PATH}/dynamodb_local
