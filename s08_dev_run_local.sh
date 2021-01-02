@@ -14,9 +14,6 @@ kill_pid ${MY_TMP_DIR_PATH}/public-tmp.pid
 rm -rf ${MY_TMP_DIR_PATH}
 mkdir -p ${MY_TMP_DIR_PATH}
 
-# activate venv
-. ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
-
 # local var
 PUBLIC_COMPUTE_PORT=${LOCAL_PUBLIC_COMPUTE_PORT}
 PUBLIC_STATIC_PORT=${LOCAL_PUBLIC_STATIC_PORT}
@@ -102,6 +99,9 @@ aws dynamodb wait table-exists \
     --table-name tmp_table \
     --endpoint-url "${DYNAMODB_ENDPOINT_URL}" \
     --region "${DYNAMODB_REGION}"
+
+# activate venv
+. ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
 
 # deploygen
 cd ${PROJECT_ROOT_PATH}
