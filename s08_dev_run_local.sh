@@ -55,6 +55,11 @@ export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXXX
 export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 export FLASK_RUN_PORT=${PUBLIC_COMPUTE_PORT}
 export FUTSU_GCP_ENABLE=0
+export FLASK_DEBUG=1
+export FLASK_APP=${PROJECT_ROOT_PATH}/src/endpoint.py
+
+# activate venv
+. ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
 
 # update dynamodb local
 mkdir -p ${MY_TMP_DIR_PATH}
@@ -100,9 +105,6 @@ aws dynamodb wait table-exists \
     --endpoint-url "${DYNAMODB_ENDPOINT_URL}" \
     --region "${DYNAMODB_REGION}"
 
-# activate venv
-. ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
-
 # deploygen
 cd ${PROJECT_ROOT_PATH}
 ${PROJECT_ROOT_PATH}/_gen_deploygen.sh ${STAGE}
@@ -124,8 +126,6 @@ echo $! > ${MY_TMP_DIR_PATH}/public-tmp.pid
 
 # local run
 cd ${PROJECT_ROOT_PATH}/src
-export FLASK_DEBUG=1
-export FLASK_APP=${PROJECT_ROOT_PATH}/src/endpoint.py
 ${PROJECT_ROOT_PATH}/dev_env/venv/bin/flask run --host 0.0.0.0
 
 # clean up
