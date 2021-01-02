@@ -2,7 +2,7 @@
 
 . _env.sh
 
-MY_TMP_DIR_PATH=${PROJECT_ROOT_PATH}/dev.local.tmp
+MY_TMP_DIR_PATH=${LOCAL_TMP_DIR_PATH}
 
 # clean up
 cd ${PROJECT_ROOT_PATH}
