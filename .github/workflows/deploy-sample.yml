@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run CI script
+      - name: Run unit test
         run: sample-ci/unittest.sh
 
   # This workflow contains a single job called "build"
@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Run CI script
+      - name: Deploy sample
         run: sample-ci/deploy.sh
         env:
           SAMPLE_CI_SECRET: ${{ secrets.SAMPLE_CI_SECRET }}
