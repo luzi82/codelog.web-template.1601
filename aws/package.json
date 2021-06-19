@@ -3,9 +3,9 @@
     "dependencies": {},
     "devDependencies": {
         "npm": "^7.18.1",
-        "serverless": "^2.15.0",
-        "serverless-domain-manager": "^4.2.3",
+        "serverless": "^2.47.0",
+        "serverless-domain-manager": "^5.1.0",
         "serverless-python-requirements": "^5.1.0",
-        "serverless-wsgi": "^1.7.5"
+        "serverless-wsgi": "^1.7.8"
     }
 }
