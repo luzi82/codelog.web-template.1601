@@ -15,8 +15,8 @@ ${SERVERLESS} --version
 
 cd ${MY_TMP_DIR_PATH}
 cp ${PROJECT_ROOT_PATH}/aws/serverless.yml ${MY_TMP_DIR_PATH}/
-${SERVERLESS} --stage ${STAGE} remove -v
-${SERVERLESS} --stage ${STAGE} delete_domain
+${SERVERLESS} remove --stage ${STAGE} -v
+${SERVERLESS} delete_domain --stage ${STAGE}
 
 cd ${PROJECT_ROOT_PATH}
 rm -rf ${MY_TMP_DIR_PATH}
