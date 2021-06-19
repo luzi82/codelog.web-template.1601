@@ -37,8 +37,8 @@ ${PROJECT_ROOT_PATH}/_gen_deploygen.sh ${STAGE}
 # deploy
 cd ${MY_TMP_DIR_PATH}
 cp ${PROJECT_ROOT_PATH}/aws/serverless.yml ${MY_TMP_DIR_PATH}/
-${SERVERLESS} --stage ${STAGE} create_domain
-${SERVERLESS} --stage ${STAGE} deploy -v
+${SERVERLESS} create_domain --stage ${STAGE}
+${SERVERLESS} deploy --stage ${STAGE} -v
 
 cd ${PROJECT_ROOT_PATH}
 rm -rf ${MY_TMP_DIR_PATH}
