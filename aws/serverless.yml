@@ -6,6 +6,7 @@ provider:
   name: aws
   stage: ${opt:stage, 'dev'}
   runtime: python3.7
+  memorySize: 128
   # https://www.serverless.com/framework/docs/deprecations/#AWS_API_GATEWAY_NAME_STARTING_WITH_SERVICE
   apiGateway:
     shouldStartNameWithService: true
