@@ -5,12 +5,16 @@
 cd ${PROJECT_ROOT_PATH}
 rm -rf ${PROJECT_ROOT_PATH}/aws_env
 mkdir -p ${PROJECT_ROOT_PATH}/aws_env
+mkdir -p ${PROJECT_ROOT_PATH}/aws_env/npm
+
+cd ${PROJECT_ROOT_PATH}/aws_env/npm
+npm install npm --no-save
+NPM=${PROJECT_ROOT_PATH}/aws_env/npm/node_modules/.bin/npm
 
 cd ${PROJECT_ROOT_PATH}/aws_env
 ln -s ${PROJECT_ROOT_PATH}/aws/package.json ${PROJECT_ROOT_PATH}/aws_env/
-npm install npm --no-save
-NPM=${PROJECT_ROOT_PATH}/aws_env/node_modules/.bin/npm
 ${NPM} install
+${NPM} install --no-save ${PROJECT_ROOT_PATH}/sls-plugins/serverless-cleanup-s3-delete-bucket
 SERVERLESS=${PROJECT_ROOT_PATH}/aws_env/node_modules/.bin/serverless
 ${SERVERLESS} --version
 
