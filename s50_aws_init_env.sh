@@ -5,7 +5,7 @@
 cd ${PROJECT_ROOT_PATH}
 rm -rf ${PROJECT_ROOT_PATH}/aws_env
 mkdir -p ${PROJECT_ROOT_PATH}/aws_env
-mkdir -p ${PROJECT_ROOT_PATH}/aws_env/npm
+# mkdir -p ${PROJECT_ROOT_PATH}/aws_env/npm
 
 # cd ${PROJECT_ROOT_PATH}/aws_env/npm
 # npm install npm --no-save
