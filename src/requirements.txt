@@ -1,3 +1,5 @@
+# https://github.com/logandk/serverless-wsgi/issues/179
+# Flask>=2 require werkzeug>=2, serverless-wsgi not able to support.
+Flask<2
 boto3
-Flask
 futsu
