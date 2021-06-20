@@ -1,6 +1,11 @@
 service: codelog-webtemplate-1601
 
-frameworkVersion: ">=2.12.0 <3.0.0"
+frameworkVersion: ">=2.47.0 <3.0.0"
+
+projectDir: ../
+
+# https://www.serverless.com/framework/docs/deprecations/#NEW_VARIABLES_RESOLVER
+variablesResolutionMode: 20210326
 
 provider:
   name: aws
@@ -27,91 +32,93 @@ provider:
   deploymentBucket:
     name: ${self:service}-${opt:stage}-deploy
     serverSideEncryption: AES256
-  iamRoleStatements:
-  - Effect: 'Allow'
-    Action:
-    - s3:GetObject
-    Resource:
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-        - /public-static/*
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-        - /public-deploygen/*
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-        - /private-static/*
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-        - /private-deploygen/*
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-        - /private-conf/*
-  - Effect: 'Allow'
-    Action:
-    - s3:GetObject
-    - s3:PutObject
-    - s3:DeleteObject
-    Resource:
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-        - /public-mutable/*
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-        - /public-tmp/*
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-        - /private-mutable/*
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-        - /private-tmp/*
-  - Effect: 'Allow'
-    Action:
-    - s3:ListBucket
-    Resource:
-    - Fn::Join:
-      - ''
-      - - 'arn:aws:s3:::'
-        - Ref: StorageBucket
-  - Effect: 'Allow'
-    Action:
-    - dynamodb:BatchGetItem
-    - dynamodb:BatchWriteItem
-    - dynamodb:ConditionCheckItem
-    - dynamodb:DeleteItem
-    - dynamodb:GetItem
-    - dynamodb:PutItem
-    - dynamodb:Query
-    - dynamodb:Scan
-    - dynamodb:UpdateItem
-    Resource:
-    - Fn::GetAtt:
-      - Db
-      - Arn
-    - Fn::Join:
-      - ''
-      - - Fn::GetAtt:
+  iam:
+    role:
+      statements:
+      - Effect: 'Allow'
+        Action:
+        - s3:GetObject
+        Resource:
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+            - /public-static/*
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+            - /public-deploygen/*
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+            - /private-static/*
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+            - /private-deploygen/*
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+            - /private-conf/*
+      - Effect: 'Allow'
+        Action:
+        - s3:GetObject
+        - s3:PutObject
+        - s3:DeleteObject
+        Resource:
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+            - /public-mutable/*
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+            - /public-tmp/*
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+            - /private-mutable/*
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+            - /private-tmp/*
+      - Effect: 'Allow'
+        Action:
+        - s3:ListBucket
+        Resource:
+        - Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: StorageBucket
+      - Effect: 'Allow'
+        Action:
+        - dynamodb:BatchGetItem
+        - dynamodb:BatchWriteItem
+        - dynamodb:ConditionCheckItem
+        - dynamodb:DeleteItem
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:UpdateItem
+        Resource:
+        - Fn::GetAtt:
           - Db
           - Arn
-        - '/index/*'
+        - Fn::Join:
+          - ''
+          - - Fn::GetAtt:
+              - Db
+              - Arn
+            - '/index/*'
   memorySize: 256
   # https://www.serverless.com/framework/docs/deprecations/#AWS_API_GATEWAY_NAME_STARTING_WITH_SERVICE
   apiGateway:
