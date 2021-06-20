@@ -2,7 +2,6 @@
     "homepage": "https://github.com/luzi82/codelog.flask",
     "dependencies": {},
     "devDependencies": {
-        "npm": "^7.18.1",
         "serverless": "^2.47.0",
         "serverless-domain-manager": "^5.1.0",
         "serverless-python-requirements": "^5.1.0",
