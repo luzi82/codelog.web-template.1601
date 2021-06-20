@@ -133,6 +133,7 @@ functions:
     timeout: 10 # timeout need to be longer in first run
     events:
     - http: ANY /
+    - http: 'ANY {proxy+}'
   job0:
     handler: jobs.job0
     memorySize: 128

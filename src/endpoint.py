@@ -78,3 +78,9 @@ def get_compute_domain():
 @app.route('/testme')
 def testme():
   return 'testme'
+
+# To enable this func:
+# serverless.yml > custom.vpcConfig.createNatGateway = 1
+@app.route('/testweb')
+def testweb():
+  return futsu.storage.path_to_bytes('https://httpbin.org/get').decode('utf-8')
