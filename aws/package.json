@@ -6,6 +6,7 @@
         "serverless-domain-manager": "^5.1.0",
         "serverless-python-requirements": "^5.1.0",
         "serverless-s3-sync": "^1.15.0",
-        "serverless-wsgi": "^1.7.8"
+        "serverless-wsgi": "^1.7.8",
+        "serverless-cleanup-s3-delete-bucket": "file:../sls-plugins/serverless-cleanup-s3-delete-bucket"
     }
 }
