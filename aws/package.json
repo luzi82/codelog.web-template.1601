@@ -1,7 +1,7 @@
 {
     "homepage": "https://github.com/luzi82/codelog.web-template.20200928",
-    "dependencies": {},
     "devDependencies": {
+        "chalk": "^4.1.1",
         "npm": "^7.18.1",
         "serverless": "^2.47.0",
         "serverless-cleanup-s3-delete-bucket": "file:../sls-plugins/serverless-cleanup-s3-delete-bucket",
