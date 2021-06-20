@@ -8,7 +8,6 @@ mkdir -p ${PROJECT_ROOT_PATH}/aws_env
 
 cd ${PROJECT_ROOT_PATH}/aws_env
 ln -s ${PROJECT_ROOT_PATH}/aws/package.json ${PROJECT_ROOT_PATH}/aws_env/
-ln -s ${PROJECT_ROOT_PATH}/aws/package-lock.json ${PROJECT_ROOT_PATH}/aws_env/
 npm install npm --no-save
 NPM=${PROJECT_ROOT_PATH}/aws_env/node_modules/.bin/npm
 ${NPM} install
