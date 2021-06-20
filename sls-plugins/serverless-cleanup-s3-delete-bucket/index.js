@@ -16,7 +16,8 @@ class ServerlessCleanupS3DeleteBucket {
         options: {
           verbose: {
             usage: 'Increase verbosity',
-            shortcut: 'v'
+            shortcut: 'v',
+            type: 'boolean'
           }
         }
       },
