@@ -2,7 +2,6 @@
     "homepage": "https://github.com/luzi82/codelog.web-template.20200928",
     "devDependencies": {
         "serverless": "^2.47.0",
-        "serverless-cleanup-s3-delete-bucket": "file:../sls-plugins/serverless-cleanup-s3-delete-bucket",
         "serverless-deployment-bucket": "^1.1.2",
         "serverless-domain-manager": "^5.1.0",
         "serverless-python-requirements": "^5.1.0",
