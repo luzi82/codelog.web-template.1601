@@ -1,6 +1,6 @@
 {
   "name": "serverless-cleanup-s3-delete-bucket",
-  "version": "1601.0.1",
+  "version": "1601.0.2",
   "dependencies": {
     "chalk": "^4.1.1",
     "serverless": "^2.47.0"
