@@ -1,6 +1,7 @@
 {
     "homepage": "https://github.com/luzi82/codelog.web-template.20200928",
     "devDependencies": {
+        "npm": "^7.18.1",
         "serverless": "^2.47.0",
         "serverless-deployment-bucket": "^1.1.2",
         "serverless-domain-manager": "^5.1.0",
