@@ -34,3 +34,7 @@ aws configure # configure credentials
 ## Undeploy from AWS
 
 1. `./s50_aws_init_env.sh && ./s59_aws_undeploy.sh`
+
+## Enable web access
+
+1. In serverless.yml, modify createNatGateway to 1.

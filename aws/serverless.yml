@@ -475,6 +475,17 @@ resources:
 
 custom:
   functionsBasePath: ${self:custom.projectRootPath}/src
+  vpcConfig:
+    enabled: true
+    cidrBlock: '10.0.0.0/16'
+    createNatGateway: false
+    createNetworkAcl: false
+    createDbSubnet: true
+    createFlowLogs: false
+    createBastionHost: false
+    createNatInstance: false
+    createParameters: false
+    exportOutputs: false
   wsgi:
     app: endpoint.app
     pythonBin: python
@@ -515,5 +526,6 @@ plugins:
 - serverless-domain-manager
 - serverless-python-requirements
 - serverless-s3-sync
+- serverless-vpc-plugin
 - serverless-wsgi
 - serverless-cleanup-s3-delete-bucket
