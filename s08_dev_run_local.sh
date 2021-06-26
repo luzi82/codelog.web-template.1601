@@ -10,13 +10,19 @@ MY_VAR_DIR_PATH=${LOCAL_VAR_DIR_PATH}
 . ${PROJECT_ROOT_PATH}/dev_env/venv/bin/activate
 
 # clean up
-cd ${PROJECT_ROOT_PATH}
-kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-static.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-mutable.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-deploygen.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-tmp.pid
-rm -rf ${MY_TMP_DIR_PATH}
+function cleanup(){
+  cd ${PROJECT_ROOT_PATH}
+  kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
+  kill_pid ${PID_DIR_PATH}/${STAGE}.public-static.pid
+  kill_pid ${PID_DIR_PATH}/${STAGE}.public-mutable.pid
+  kill_pid ${PID_DIR_PATH}/${STAGE}.public-deploygen.pid
+  kill_pid ${PID_DIR_PATH}/${STAGE}.public-tmp.pid
+  rm -rf ${MY_TMP_DIR_PATH}
+}
+trap cleanup EXIT
+
+cleanup
+
 mkdir -p ${MY_TMP_DIR_PATH}
 
 # local var
@@ -96,12 +102,3 @@ echo $! > ${MY_TMP_DIR_PATH}/public-tmp.pid
 # local run
 cd ${PROJECT_ROOT_PATH}/src
 ${PROJECT_ROOT_PATH}/dev_env/venv/bin/flask run --host 0.0.0.0
-
-# clean up
-cd ${PROJECT_ROOT_PATH}
-kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-static.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-mutable.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-deploygen.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-tmp.pid
-rm -rf ${MY_TMP_DIR_PATH}
