@@ -122,12 +122,3 @@ mkdir -p ${PRIVATE_TMP_PATH}
 
 # run test
 pytest -v -s
-
-# clean up
-cd ${PROJECT_ROOT_PATH}
-kill_pid ${PID_DIR_PATH}/${STAGE}.dynamodb.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-static.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-mutable.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-deploygen.pid
-kill_pid ${PID_DIR_PATH}/${STAGE}.public-tmp.pid
-rm -rf ${MY_TMP_DIR_PATH}
