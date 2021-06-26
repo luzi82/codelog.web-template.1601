@@ -479,7 +479,7 @@ custom:
   vpcConfig:
     enabled: true
     cidrBlock: '10.0.0.0/16'
-    createNatGateway: false
+    createNatGateway: false # Enable this will enable web site to whole lambda, but have constant cost per month.
     createNetworkAcl: false
     createDbSubnet: true
     createFlowLogs: false
